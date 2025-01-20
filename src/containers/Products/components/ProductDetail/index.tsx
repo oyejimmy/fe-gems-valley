@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Typography, Table, Row, Col, Card, Tag, Space } from "antd";
 import styled from "styled-components";
+import { mockData } from "../../../../utils/helpers";
 
 const { Title } = Typography;
 
@@ -58,47 +59,86 @@ const DetailsTable = styled(Table)`
   }
 `;
 
-const mockGemDetails = {
-  title: "Gem 1",
-  image: "https://via.placeholder.com/300",
-  details: [
-    { key: "Gem Type", value: "Tourmaline" },
-    { key: "Color", value: "Green" },
-    { key: "Shape", value: "Asscher" },
-    { key: "Size", value: "10.8 x 10.8 x 8.0 mm" },
-    { key: "Weight", value: "6.60 Carats" },
-    { key: "Luster", value: "Excellent" },
-    { key: "Clarity", value: "Eye Clean" },
-    { key: "Treatment", value: "Natural" },
-    { key: "Origin", value: "Afghanistan" },
-  ],
-};
-
 const ProductDetails: React.FC = () => {
-  const { gemId } = useParams<{ gemId: string }>();
+  const { productName, gemId } = useParams<{ productName: any; gemId: any }>();
+  console.log(productName, gemId);
 
-  const { title, image, details } = mockGemDetails;
+  // Find the gemstone by name
+  const selectedProduct = mockData.find(
+    (item) => item.name.toLowerCase() === productName?.toLowerCase()
+  );
 
+  if (!selectedProduct) {
+    return (
+      <ExperienceWrapper>
+        <ExperienceTitle level={2}>Product Not Found</ExperienceTitle>
+      </ExperienceWrapper>
+    );
+  }
+
+  // Find the specific variation using its ID
+  const selectedVariation = selectedProduct.variations.find(
+    (variation): any => variation.id === parseInt(gemId)
+  );
+  console.log(selectedVariation);
+
+  if (!selectedVariation) {
+    return (
+      <ExperienceWrapper>
+        <ExperienceTitle level={2}>Variation Not Found</ExperienceTitle>
+      </ExperienceWrapper>
+    );
+  }
+
+  // Prepare table data
+  const details = [
+    { key: "Type", value: selectedVariation.type },
+    { key: "Color", value: selectedVariation.color },
+    { key: "Weight", value: selectedVariation.weight },
+    { key: "Shape", value: selectedVariation.shape },
+    { key: "Clarity", value: selectedVariation.clarity },
+    {
+      key: "Stock",
+      value:
+        selectedVariation.stock > 0 ? selectedVariation.stock : "Out of Stock",
+    },
+    {
+      key: "Certifications",
+      value: selectedVariation.certifications || "No Certification",
+    },
+    { key: "Description", value: selectedVariation.description },
+  ];
+  console.log(details);
   return (
     <ExperienceWrapper>
-      <ExperienceTitle level={2}>Gem Complete Details</ExperienceTitle>
+      <ExperienceTitle level={2}>
+        {selectedVariation.name} Details
+      </ExperienceTitle>
       <Row gutter={[16, 16]}>
+        {/* Image Section */}
         <Col xs={24} sm={24} md={10}>
           <StyledCard bordered={false}>
-            <img src={image} alt={title} />
+            <img
+              src={selectedVariation.images[0]}
+              alt={selectedVariation.name}
+            />
           </StyledCard>
         </Col>
+
+        {/* Details Section */}
         <Col xs={24} sm={24} md={14}>
           <Space direction="horizontal">
-            <Title level={3}>{title} Name</Title>
+            <Title level={3}>
+              {selectedVariation.name} - {selectedVariation.color}
+            </Title>
             <Tag style={{ fontWeight: "600" }} color="red">
-              $40
+              ${selectedVariation.price.toFixed(2)}
             </Tag>
           </Space>
           <DetailsTable
             columns={[
               { title: "Item Description", dataIndex: "key", key: "key" },
-              { title: "", dataIndex: "value", key: "value" },
+              { title: "Details", dataIndex: "value", key: "value" },
             ]}
             dataSource={details}
             pagination={false}

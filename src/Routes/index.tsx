@@ -6,6 +6,7 @@ import Home from "../containers/Home";
 import Products from "../containers/Products";
 import ProductDetails from "../containers/Products/components/ProductDetail";
 import ProductCategory from "../containers/Products/components/ProductCategory";
+import AdminPanel from "../containers/Admin";
 
 const AppRoutes = () => (
   <Router>
@@ -20,6 +21,8 @@ const AppRoutes = () => (
         />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/admin" element={<AdminPanel />} />{" "}
+        {/* ✅ Add Admin Route */}
       </Routes>
     </Layout>
   </Router>

@@ -35,21 +35,21 @@ const StyledCard = styled(Card)`
 const Products: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleCardClick = (title: string) => {
-    navigate(`/products/${title.toLowerCase()}`);
+  const handleCardClick = (productName: string) => {
+    navigate(`/products/${productName.toLowerCase()}`);
   };
 
   return (
     <ExperienceWrapper>
       <ExperienceTitle level={2}>Products</ExperienceTitle>
       <Row gutter={[16, 16]}>
-        {mockData.stones.map(({ icon, title }: any, index: any) => (
-          <Col xs={24} sm={12} md={6} key={index}>
-            <StyledCard hoverable onClick={() => handleCardClick(title)}>
-              <img src={icon} alt={title} />
+        {mockData.map(({ name, icon }) => (
+          <Col xs={24} sm={12} md={6} key={name}>
+            <StyledCard hoverable onClick={() => handleCardClick(name)}>
+              <img src={icon} alt={name} />
               <Card.Meta
-                title={title}
-                description={`I'm dealing in ${title}.`}
+                title={name}
+                description={`Explore ${name} variations`}
               />
             </StyledCard>
           </Col>

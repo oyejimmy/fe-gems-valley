@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Typography, Card, Row, Col } from "antd";
 import styled from "styled-components";
+import { mockData } from "../../../../utils/helpers";
 
 const { Title } = Typography;
 
@@ -42,34 +43,36 @@ const ProductCategory: React.FC = () => {
   const { productName } = useParams<{ productName: string }>();
   const navigate = useNavigate();
 
-  const categoryData = [
-    { id: 1, image: "https://via.placeholder.com/200", title: "Gem 1" },
-    { id: 2, image: "https://via.placeholder.com/200", title: "Gem 2" },
-    { id: 3, image: "https://via.placeholder.com/200", title: "Gem 3" },
-    { id: 4, image: "https://via.placeholder.com/200", title: "Gem 4" },
-    { id: 5, image: "https://via.placeholder.com/200", title: "Gem 5" },
-    { id: 6, image: "https://via.placeholder.com/200", title: "Gem 6" },
-  ];
+  const selectedProduct = mockData.find(
+    (item) => item.name.toLowerCase() === productName?.toLowerCase()
+  );
 
-  const handleCardClick = (gemId: number) => {
-    if (productName) {
-      navigate(`/products/${productName}/${gemId}`);
-    } else {
-      console.error("Product name is undefined");
-    }
+  if (!selectedProduct) {
+    return (
+      <ExperienceWrapper>
+        <ExperienceTitle level={2}>Product Not Found</ExperienceTitle>
+      </ExperienceWrapper>
+    );
+  }
+
+  const handleCardClick = (id: number) => {
+    navigate(`/products/${productName}/${id}`);
   };
 
   return (
     <ExperienceWrapper>
       <ExperienceTitle level={2}>
-        {productName?.toUpperCase() ?? "Unknown"} Gems
+        {productName?.toUpperCase()} Variations
       </ExperienceTitle>
       <Row gutter={[16, 16]}>
-        {categoryData.map(({ id, image, title }) => (
+        {selectedProduct.variations.map(({ id, images, color, weight }) => (
           <Col xs={12} sm={12} md={12} lg={12} xl={12} key={id}>
             <StyledCard hoverable onClick={() => handleCardClick(id)}>
-              <img src={image} alt={title} />
-              <Card.Meta title={title} />
+              <img src={images[0]} alt={color} />
+              <Card.Meta
+                title={`${color} - ${weight}`}
+                description={`Explore ${color} ${selectedProduct.name}`}
+              />
             </StyledCard>
           </Col>
         ))}

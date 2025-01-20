@@ -5,42 +5,59 @@ import { Typography } from "antd";
 const { Title, Paragraph } = Typography;
 
 const Container = styled.div`
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fff, #f9f9f9);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Playfair Display", serif;
+  color: #444;
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
-  h1 {
-    font-size: 24px;
+  h3 {
+    font-size: 28px;
     font-weight: bold;
+    color: #00695c;
   }
 `;
 
 const Content = styled.div`
   text-align: justify;
+  font-size: 18px;
+  line-height: 1.8;
+`;
+
+const Highlight = styled.span`
+  color: #d81b60;
+  font-weight: bold;
 `;
 
 const CEOSection = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 30px;
-  background: #f9f9f9;
+  gap: 20px;
+  background: #f0f0f0;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    margin-right: 20px;
     object-fit: cover;
+    border: 3px solid #d81b60;
   }
 
   div {
@@ -49,14 +66,17 @@ const CEOSection = styled.div`
 
     p {
       margin: 5px 0;
+      font-size: 16px;
     }
 
     a {
       color: #007bff;
       text-decoration: none;
+      font-weight: bold;
 
       &:hover {
         text-decoration: underline;
+        color: #d81b60;
       }
     }
   }
@@ -71,52 +91,54 @@ const AboutUs = () => {
 
       <Content>
         <Paragraph>
-          Welcome to our Shop! We have been in this business since 2008. We are
-          dealing in Colored Gemstones like Tourmaline, Aquamarine, Kunzite,
-          Topaz, Sphene, Garnet, Quartz & Peridot, etc.
+          Welcome to our <Highlight>Fine Stone Shop!</Highlight> We have been in
+          the gemstone business since <Highlight>2008</Highlight>. We specialize
+          in exquisite
+          <Highlight> Colored Gemstones</Highlight> including **Tourmaline,
+          Aquamarine, Kunzite, Topaz, Sphene, Garnet, Quartz, and Peridot.**
         </Paragraph>
 
         <Paragraph>
-          We mainly deal in Gemstones from Pakistan & Afghanistan origin.
-          Northern areas of Pakistan have very famous mines producing many
-          unique and high-quality gemstones. We have direct access to miners to
-          facilitate our valued buyers by offering them competitive quality
-          prices to help them grow their businesses. Our priority is to maintain
-          good relations with our customers.
+          Our gems originate from **Pakistan & Afghanistan**, renowned for their
+          unique and high-quality stones. We collaborate directly with miners,
+          ensuring the **best quality gemstones at competitive prices** to help
+          our customers grow their businesses.
         </Paragraph>
 
         <Paragraph>
-          If you are looking for perfect colored gemstones, then you have come
-          to the right place. We are well-established, professional gemstone
-          dealers based in Pakistan and deal only with the highest quality
-          gemstones. Our cutting and polishing meet the highest standards, along
-          with symmetry. We cut with beauty being the priority and not the
-          finished weight!
+          If you are searching for **top-quality colored gemstones**, you are in
+          the right place! Our stones are **100% natural**, precisely cut,
+          polished, and meet the **highest industry standards** with exceptional
+          symmetry.
         </Paragraph>
 
         <Paragraph>
-          All stones are 100% natural with accurate descriptions, highly
-          magnified photographic images so that every detail is visible, and all
-          treatments are fully disclosed.
+          Each gemstone is showcased with **magnified, high-resolution images**
+          so you can inspect every detail. All **treatments are fully
+          disclosed** for complete transparency.
         </Paragraph>
       </Content>
 
       <CEOSection>
-        <img src="path_to_ceo_image" alt="CEO" />
+        <img
+          src="https://www.w3schools.com/howto/img_avatar.png"
+          alt="CEO Hamza Gull"
+        />
         <div>
           <Paragraph>
             <strong>CEO:</strong> Hamza Gull
           </Paragraph>
           <Paragraph>
-            <strong>Contact & Whatsapp:</strong> +66 618987192
+            <strong>Contact & WhatsApp:</strong>{" "}
+            <Highlight>+66 618987192</Highlight>
           </Paragraph>
           <Paragraph>
             <strong>Email:</strong>{" "}
             <a href="mailto:finestonespk@gmail.com">finestonespk@gmail.com</a>
           </Paragraph>
           <Paragraph>
-            You can also contact us on social media like Instagram & Facebook.
-            All the links are at the bottom of the page.
+            You can also find us on **Instagram & Facebook.** Links are
+            available at the bottom of the page.
           </Paragraph>
         </div>
       </CEOSection>

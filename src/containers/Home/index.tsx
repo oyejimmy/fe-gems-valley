@@ -1,9 +1,9 @@
 import React from "react";
 import { Row, Col, Card, Image, Typography, Carousel, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { mockData } from "../../utils/helpers";
 import styled from "styled-components";
 import { CarOutlined, CheckOutlined, UndoOutlined } from "@ant-design/icons";
+import { mockData } from "../../utils/helpers";
 
 const { Title, Text } = Typography;
 // Styled components
@@ -265,14 +265,14 @@ const Home: React.FC = () => {
 
       <SectionTitle>Featured Gems</SectionTitle>
       <Row gutter={[32, 32]}>
-        {mockData.stones.map(({ icon, title }, index) => (
+        {mockData.map(({ icon, name }, index) => (
           <Col xs={24} sm={12} md={6} key={index}>
             <StyledCard
               hoverable
               cover={
                 <Image
                   preview={false}
-                  alt={title}
+                  alt={name}
                   src={icon}
                   style={imgStyle}
                   onMouseEnter={(e) =>
@@ -283,18 +283,18 @@ const Home: React.FC = () => {
                   }
                 />
               }
-              onClick={() => handleCardClick(title)}
+              onClick={() => handleCardClick(name)}
             >
               <Card.Meta
                 title={
                   <Text strong style={{ color: "#2980b9" }}>
-                    {title}
+                    {name}
                   </Text>
                 }
                 description={
                   <Text
                     style={{ color: "#34495e" }}
-                  >{`Beautiful ${title}`}</Text>
+                  >{`Beautiful ${name}`}</Text>
                 }
               />
             </StyledCard>
